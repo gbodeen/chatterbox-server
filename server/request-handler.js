@@ -49,7 +49,7 @@ var requestHandler = function (request, response) {
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
-  if (request.url === "/chatterbox/classes/messages" || request.url === "/classes/messages") {
+  if (request.url === '/chatterbox/classes/messages' || request.url === '/classes/messages') {
     if (request.method === 'GET') {
 
       var statusCode = 200;
