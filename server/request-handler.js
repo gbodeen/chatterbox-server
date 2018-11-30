@@ -11,8 +11,13 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
+let messages = [];
 
-var requestHandler = function(request, response) {
+var requestHandler = function (request, response) {
+  console.log(" ");
+  console.log("!F *** request handler ***");
+  console.log(request.on());
+  //console.log(response)
   // Request and Response come from node's http module.
   //
   // They include information about both the incoming request, such as
@@ -28,6 +33,36 @@ var requestHandler = function(request, response) {
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
+  console.log(" ");
+  if (request.url === "/chatterbox/classes/messages") {
+    if (request.method === "GET") {
+
+      var statusCode = 200;
+      var headers = defaultCorsHeaders;
+
+      headers['Content-Type'] = 'application/json';
+
+      response.writeHead(statusCode, headers);
+      response.data = messages;
+      response.end(JSON.stringify(messages));
+
+
+    } else if (request.method === "POST") {
+
+      //console.log(request);
+
+      var statusCode = 200;
+      var headers = defaultCorsHeaders;
+
+      headers['Content-Type'] = 'application/json';
+
+      messages.push(request.data);
+
+      response.writeHead(statusCode, headers);
+      response.end();
+
+    }
+  }
 
   // The outgoing status.
   var statusCode = 200;
@@ -52,7 +87,7 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end('Hello, World!');
+  response.end(JSON.stringify(request.url));
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
@@ -71,3 +106,4 @@ var defaultCorsHeaders = {
   'access-control-max-age': 10 // Seconds.
 };
 
+exports.requestHandler = requestHandler;
