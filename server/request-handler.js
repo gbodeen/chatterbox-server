@@ -1,5 +1,3 @@
-const http = require('http');
-
 /*************************************************************
 
 You should implement your request handler function in this file.
@@ -56,48 +54,38 @@ var requestHandler = function (request, response) {
 
       var statusCode = 200;
       var headers = defaultCorsHeaders;
-
       headers['Content-Type'] = 'application/json';
-
       response.writeHead(statusCode, headers);
-      //response.data = JSON.stringify(messages);
       response.end(JSON.stringify(messages));
-
 
     } else if (request.method === "POST") {
 
-      //console.log('In the POST: ', request, Object.keys(request));
-
       var statusCode = 201;
       var headers = defaultCorsHeaders;
-
       headers['Content-Type'] = 'application/json';
-
-      let data = [];
+      let data = '';
       request.on('data', chunk => {
-        data.push(chunk);
+        data += chunk;
       }).on('end', () => {
-        data = Buffer.concat(data).toString();
         let obj = JSON.parse(data);
-
         obj.createdAt = new Date();
         obj.objectId = nextId;
         nextId++;
         messages.results.push(obj);
-
         response.writeHead(statusCode, headers);
-        response.end(JSON.stringify(obj));
+        response.end(data);
       });
 
-
-
     } else if (request.method === "OPTIONS") {
+
       var statusCode = 200;
       var headers = defaultCorsHeaders;
       headers['Content-Type'] = 'text/plain';
       response.writeHead(statusCode, headers);
       response.end();
+
     }
+
   } else {
     // The outgoing status.
     var statusCode = 404;
@@ -125,7 +113,5 @@ var requestHandler = function (request, response) {
     response.end(JSON.stringify(request.url) + ' is not a valid URL');
   }
 };
-
-
 
 exports.requestHandler = requestHandler;
