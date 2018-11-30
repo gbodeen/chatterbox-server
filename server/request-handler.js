@@ -32,7 +32,7 @@ let messages = { results: [] };
 let nextId = 0;
 
 var requestHandler = function (request, response) {
-  console.log(" ");
+  console.log(' ');
   //console.log(http);
   // Request and Response come from node's http module.
   //
@@ -50,7 +50,7 @@ var requestHandler = function (request, response) {
   // console.logs in your code.
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
   if (request.url === "/chatterbox/classes/messages" || request.url === "/classes/messages") {
-    if (request.method === "GET") {
+    if (request.method === 'GET') {
 
       var statusCode = 200;
       var headers = defaultCorsHeaders;
@@ -58,7 +58,7 @@ var requestHandler = function (request, response) {
       response.writeHead(statusCode, headers);
       response.end(JSON.stringify(messages));
 
-    } else if (request.method === "POST") {
+    } else if (request.method === 'POST') {
 
       var statusCode = 201;
       var headers = defaultCorsHeaders;
@@ -76,7 +76,7 @@ var requestHandler = function (request, response) {
         response.end(data);
       });
 
-    } else if (request.method === "OPTIONS") {
+    } else if (request.method === 'OPTIONS') {
 
       var statusCode = 200;
       var headers = defaultCorsHeaders;
