@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 /*************************************************************
 
 You should implement your request handler function in this file.
@@ -28,8 +30,13 @@ var defaultCorsHeaders = {
   'access-control-max-age': 10 // Seconds.
 };
 
-let messages = { results: [] };
 let nextId = 0;
+let messages = { results: [] };
+
+fs.readFile('/Users/student/Desktop/hratx38-chatterbox-server/server/messages.txt', (err, data) => {
+  messages.results = JSON.parse('[' + data.slice(0, -1) + ']');
+  console.log(messages);
+});
 
 var requestHandler = function (request, response) {
   console.log(' ');
@@ -72,8 +79,10 @@ var requestHandler = function (request, response) {
         obj.objectId = nextId;
         nextId++;
         messages.results.push(obj);
+        fs.appendFile('/Users/student/Desktop/hratx38-chatterbox-server/server/messages.txt',
+          JSON.stringify(obj) + ',\n', err => console.log('That did not work.'));
         response.writeHead(statusCode, headers);
-        response.end(data);
+        response.end(JSON.stringify(obj));
       });
 
     } else if (request.method === 'OPTIONS') {
