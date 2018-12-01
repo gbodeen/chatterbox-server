@@ -30,12 +30,13 @@ var defaultCorsHeaders = {
   'access-control-max-age': 10 // Seconds.
 };
 
-let nextId = 0;
+let nextId;
 let messages = { results: [] };
 
-fs.readFile('/Users/student/Desktop/hratx38-chatterbox-server/server/messages.txt', (err, data) => {
-  messages.results = JSON.parse('[' + data.slice(0, -1) + ']');
+fs.readFile('server/messages.txt', (err, data) => {
+  messages.results = JSON.parse('[' + data.slice(0, -2) + ']');
   console.log(messages);
+  nextId = messages.results[messages.results.length - 1].objectId + 1;
 });
 
 var requestHandler = function (request, response) {
@@ -79,8 +80,14 @@ var requestHandler = function (request, response) {
         obj.objectId = nextId;
         nextId++;
         messages.results.push(obj);
-        fs.appendFile('/Users/student/Desktop/hratx38-chatterbox-server/server/messages.txt',
-          JSON.stringify(obj) + ',\n', err => console.log('That did not work.'));
+        fs.appendFile('server/messages.txt',
+          JSON.stringify(obj) + ',\n',
+          err => {
+            if (err) {
+              (console.log('That did not work.', err));
+            }
+          }
+        );
         response.writeHead(statusCode, headers);
         response.end(JSON.stringify(obj));
       });

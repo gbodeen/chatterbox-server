@@ -1,3 +1,8 @@
 {"username":"Kevinnn","text":"why is it all so dark","roomname":"noooooooooooo","createdAt":"2018-12-01T01:30:29.820Z","objectId":0},
 {"username":"Kevinnn","text":"why is it all so dark","roomname":"noooooooooooo","createdAt":"2018-12-01T01:30:39.804Z","objectId":1},
 {"username":"Kevinnn","text":"why is it all so dark","roomname":"noooooooooooo","createdAt":"2018-12-01T01:30:40.331Z","objectId":2},
+{"username":"Darius%20the%20Conqueror","text":"We can store and access files permanently!","roomname":"noooooooooooo","createdAt":"2018-12-01T16:06:30.897Z","objectId":3},
+{"username":"Darius%20the%20Conqueror","text":"We can store and access files permanently! Maybe!","roomname":"noooooooooooo","createdAt":"2018-12-01T16:09:42.002Z","objectId":4},
+{"username":"Darius%20the%20Conqueror","text":"It does too work","roomname":"noooooooooooo","createdAt":"2018-12-01T16:12:00.645Z","objectId":5},
+{"username":"Darius%20the%20Conqueror","text":"Null errors are the best errors","roomname":"noooooooooooo","createdAt":"2018-12-01T16:13:24.158Z","objectId":6},
+{"username":"Darius%20the%20Conqueror","text":"No, no errors are the best errors","roomname":"noooooooooooo","createdAt":"2018-12-01T16:16:04.585Z","objectId":7},
